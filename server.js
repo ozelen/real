@@ -1,13 +1,17 @@
 import { renderToString } from 'react-dom/server'
-import { match, RoutingContext } from 'react-router'
+import { match, RouterContext } from 'react-router'
 import routes from './routes'
+import statics from 'serve-static';
 
 const express = require('express');
 const React = require('react');
 const Router = require('react-router');
 const app = express();
 
+app.use(statics('dist'));
 app.use(serve);
+app.set('view engine', 'jade');
+app.set('views', 'views');
 app.listen(3000);
 
 function serve (req, res) {
@@ -20,27 +24,9 @@ function serve (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      res.status(200).send(renderToString(<RoutingContext {...renderProps} />))
+      res.status(200).render('index', {html: renderToString(<RouterContext {...renderProps} />), props: '{}'})
     } else {
-      res.status(404).send('Fuck')
+      res.status(404).send('Not found')
     }
   });
 }
-
-
-
-// var routes = require('./routes')
-
-// var app = express()
-
-// // ...express config...
-
-// app.use(function(req, res, next) {
-//   var router = Router.create({location: req.url, routes: routes})
-//   router.run(function(Handler, state) {
-//     var html = React.renderToString(<Handler/>)
-//     return res.render('react_page', {html: html})
-//   })
-// });
-
-// app.listen(3000);

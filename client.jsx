@@ -1,23 +1,13 @@
 'use strict';
 
-var React from 'react'
-var {render} from 'react-dom'
-var {Router, Route} from 'react-router'
-var {history} from 'react-router/lib/BrowserHistory'
-var {default as AsyncProps} from 'react-router/lib/experimental/AsyncProps';
-
-var getTitle from './utils/getTitle'
-var routes from './routes'
-
-function onUpdate() {
-  console.log('onUpdate', this.state)
-}
-
-AsyncProps.rehydrate(window.__PROPS__)
+import React from 'react'
+import {render} from 'react-dom'
+import { Router, Route, Link, browserHistory } from 'react-router'
+import routes from './routes'
 
 render(
-  <Router history={history} createElement={AsyncProps.createElement} onUpdate={onUpdate}>
+  <Router history={browserHistory}>
     {routes}
   </Router>,
   document.getElementById('app')
-)
+);

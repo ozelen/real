@@ -4,24 +4,30 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run bootstrap & npm run serve",
+    "serve": "npm run watch & npm run server",
+    "server": "babel-node server.js",
+    "watch": "watchify client.jsx -o dist/js/bundle.js -t [ babelify --presets [ es2015 react ] ] --extension jsx",
     "build": "browserify client.jsx -o dist/js/bundle.js -t [ babelify --presets [ es2015 react ] ]",
-    "watch": "watchify client.jsx -o dist/js/bundle.js -t [ babelify --presets [ es2015 react ] ]",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "babel-node server.js"
+    "html": "jade views/index.jade -o dist",
+    "bootstrap": "cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/css/ "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel": "^6.3.26",
+    "babel-cli": "^6.4.5",
+    "bootstrap": "^3.3.6",
     "browserify": "^13.0.0",
     "express": "^4.13.4",
     "gulp": "^3.9.0",
     "history": "^1.17.0",
     "react": "^0.14.6",
-    "react-router": "^1.0.3"
+    "react-bootstrap": "^0.28.2",
+    "react-router": "^2.0.0-rc5"
   },
   "devDependencies": {
-    "babel-cli": "^6.4.5",
     "babel-core": "^6.4.5",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-transform-object-assign": "^6.3.13",
@@ -32,9 +38,13 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.4.3",
     "babelify": "^7.2.0",
+    "grunt-cli": "^0.1.13",
     "gulp-notify": "^2.2.0",
     "gulp-util": "^3.0.7",
+    "jade": "^1.11.0",
+    "less": "^2.5.3",
     "react-dom": "^0.14.6",
+    "serve-static": "^1.10.2",
     "util": "^0.10.3",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
