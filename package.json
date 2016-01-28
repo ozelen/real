@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run bootstrap & npm run serve",
-    "serve": "npm run watch & npm run server",
+    "serve": "npm run watch & npm run supervise",
     "server": "babel-node server.js",
+    "supervise": "supervisor -- -r 'babel-register' server.js",
     "watch": "watchify client.jsx -o dist/js/bundle.js -t [ babelify --presets [ es2015 react ] ] --extension jsx",
     "build": "browserify client.jsx -o dist/js/bundle.js -t [ babelify --presets [ es2015 react ] ]",
     "test": "echo \"Error: no test specified\" && exit 1",
     "html": "jade views/index.jade -o dist",
-    "bootstrap": "cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/css/ "
+    "bootstrap": "cp node_modules/bootstrap/dist/css/bootstrap.min.css* dist/css/ "
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +46,7 @@
     "less": "^2.5.3",
     "react-dom": "^0.14.6",
     "serve-static": "^1.10.2",
+    "supervisor": "^0.9.1",
     "util": "^0.10.3",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
