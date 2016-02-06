@@ -2,6 +2,7 @@ import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import routes from './routes'
 import statics from 'serve-static';
+// import mongoose from 'mongoose';
 
 const express = require('express');
 const React = require('react');
@@ -12,7 +13,7 @@ app.use(statics('dist'));
 app.use(serve);
 app.set('view engine', 'jade');
 app.set('views', 'views');
-app.listen(3000);
+app.listen(8080);
 
 function serve (req, res) {
   // Note that req.url here should be the full URL path from
@@ -30,3 +31,7 @@ function serve (req, res) {
     }
   });
 }
+
+
+// mongoose.connect('mongodb://localhost/my_database');
+
